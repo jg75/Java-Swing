@@ -172,10 +172,8 @@ public class SumOfMultiples {
         
         if (factor.compareTo(range) <= 0) {
             BigInteger count = range.divide(factor);
-            BigInteger lastMultiple = factor.multiply(count);
-        
             BigInteger term1 = factor.multiply(count);
-            BigInteger term2 = lastMultiple.multiply(count);
+            BigInteger term2 = factor.multiply(count).multiply(count);
             sum = term1.add(term2).divide(BigInteger.valueOf(2));
         }
         
@@ -193,14 +191,13 @@ public class SumOfMultiples {
                                             BigInteger range,
                                             boolean inclusive) {
         
-        Set<BigInteger> lcmSet = lcm(factors);
         BigInteger sum = BigInteger.ZERO;
         
         for (BigInteger factor : factors) {
             sum = sum.add(sumOfMultiples(factor, range, inclusive));
         }
         
-        for (BigInteger factor : lcmSet) {
+        for (BigInteger factor : lcm(factors)) {
             sum = sum.subtract(sumOfMultiples(factor, range, inclusive));
         }
         

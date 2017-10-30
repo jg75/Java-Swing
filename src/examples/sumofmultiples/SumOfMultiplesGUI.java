@@ -235,12 +235,12 @@ public class SumOfMultiplesGUI extends javax.swing.JFrame {
      */
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
         if (!factorList.isSelectionEmpty()) {
-            String selectedValue = factorList.getSelectedValue().replace(",", "");
-            BigInteger value = BigInteger.valueOf(Long.parseLong(selectedValue));
-            Set<BigInteger> set = sumOfMultiples.getFactors();
+            String value = factorList.getSelectedValue().replace(",", "");
+            BigInteger factor = BigInteger.valueOf(Long.parseLong(value));
+            Set<BigInteger> factors = sumOfMultiples.getFactors();
             
-            set.remove(value);
-            sumOfMultiples.setFactors(set);
+            factors.remove(factor);
+            sumOfMultiples.setFactors(factors);
             factorList.setModel(new NumberListModel(sumOfMultiples.getFactors()));
             sumTextArea.setText(sumOfMultiples.toString());
         }
@@ -254,11 +254,11 @@ public class SumOfMultiplesGUI extends javax.swing.JFrame {
      */
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         BigInteger factor = BigInteger.valueOf((Long) factorSpinner.getValue());
-        Set<BigInteger> set = sumOfMultiples.getFactors();
+        Set<BigInteger> factors = sumOfMultiples.getFactors();
         
-        if (!set.contains(factor)) {
-            set.add(factor);
-            sumOfMultiples.setFactors(set);
+        if (!factors.contains(factor)) {
+            factors.add(factor);
+            sumOfMultiples.setFactors(factors);
             factorList.setModel(new NumberListModel(sumOfMultiples.getFactors()));
             sumTextArea.setText(sumOfMultiples.toString());
         }
@@ -301,8 +301,6 @@ public class SumOfMultiplesGUI extends javax.swing.JFrame {
         if (inclusiveCheckBox.isSelected() != sumOfMultiples.isInclusive()) {
             inclusiveCheckBox.doClick();
         }
-        
-        sumTextArea.setText(sumOfMultiples.toString());
     }//GEN-LAST:event_resetButtonActionPerformed
     
     /**
