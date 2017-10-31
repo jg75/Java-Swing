@@ -166,15 +166,13 @@ public class SumOfMultiples {
                                             boolean inclusive) {
         BigInteger sum = BigInteger.ZERO;
         
-        if (!inclusive) {
-            range = range.subtract(BigInteger.ONE);
-        }
-        
         if (factor.compareTo(range) <= 0) {
-            BigInteger count = range.divide(factor);
-            BigInteger term1 = factor.multiply(count);
-            BigInteger term2 = factor.multiply(count).multiply(count);
-            sum = term1.add(term2).divide(BigInteger.valueOf(2));
+            BigInteger count = inclusive
+                               ? range.divide(factor)
+                               : range.subtract(BigInteger.ONE).divide(factor);
+            BigInteger low = factor.multiply(count);
+            BigInteger high = factor.multiply(count).multiply(count);
+            sum = low.add(high).divide(BigInteger.valueOf(2));
         }
         
         return sum;
